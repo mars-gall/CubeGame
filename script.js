@@ -125,26 +125,30 @@ class Enemy {
         );
     }
 
+    
+
     update() {
         this.move()
 
         this.position.x += this.velocity.x;
         this.position.y += this.velocity.y;
 
-        const enemyDeceleration = 0.1
+        const enemyDeceleration = 0.01;
 
         if (Math.abs(this.velocity.x) > 0.01) {
-            this.velocity.x *= (1 - enemyDeceleration)
+            this.velocity.x *= (1 - enemyDeceleration) 
+        }
         if (Math.abs(this.velocity.x) < 0.01) {
-            this.velocity.x = 0
+            this.velocity.x = 0 
         }
 
         if (Math.abs(this.velocity.y) > 0.01) {
-            this.velocity.y *= (1 - enemyDeceleration)
+            this.velocity.y *= (1 - enemyDeceleration) 
+        }
         if (Math.abs(this.velocity.y) < 0.01) {
             this.velocity.y = 0
         }
-    }
+    
         
     if (this.position.x + this.velocity.x <= 0 ||
         this.position.x +this.width + this.velocity.x >= gameCanvas.width
@@ -156,10 +160,10 @@ class Enemy {
         this.position.y + this.height + this.velocity.y >= gameCanvas.height
     ) {
         this.velocity.y *= -1.00
-    }
-}
-    const maxEnemyVelocity = 30
 
+}
+
+    const maxEnemyVelocity = 30;
     if (this.velocity.x > maxEnemyVelocity) this.velocity.x = maxEnemyVelocity;
     if (this.velocity.y > maxEnemyVelocity) this.velocity.y = maxEnemyVelocity;
     if (this.velocity.x < -maxEnemyVelocity) this.velocity.x = -maxEnemyVelocity;
@@ -207,7 +211,7 @@ class Enemy {
         other.position.y += ny * correction;
 
         const relativeVelocityX = other.velocity.x - this.velocity.x;
-        const relativeVelocityY = other.velocity.y - this.velocity.x;
+        const relativeVelocityY = other.velocity.y - this.velocity.y;
         const relativeVelocityAlongNormal = relativeVelocityX * nx + relativeVelocityY * ny;
 
         if (relativeVelocityAlongNormal > 0) {
@@ -330,6 +334,8 @@ function update() {
 
     player.velocity.x += inputX * acceleration;
     player.velocity.y += inputY * acceleration;
+    player.position.x += player.velocity.x
+    player.position.y += player.velocity.y
 }
 
     const friction = 0.025
@@ -356,7 +362,6 @@ function update() {
     }
         
         gameTime += Tick_Time;
-    player.update();
 }
 
 window.addEventListener('keyup', (event) => {
